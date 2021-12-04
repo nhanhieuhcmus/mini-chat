@@ -1,0 +1,37 @@
+import { Box } from "@chakra-ui/layout";
+import { useState } from "react";
+import Chatbox from "../components/Chatbox";
+import SideDrawer from "../components/miscellaneous/SideDrawer";
+import MyChats from "../components/MyChats";
+import { ChatState } from "../context/ChatProvider";
+
+const Chatpage = () => {
+    const { user, test } = ChatState();
+    const [fetchAgain, setFetchAgain] = useState(false);
+
+    console.log("check user info in Chatpage: ", user);
+    console.log("check test value in Chatpage: ", test);
+    return (
+        <div style={{ width: "100%" }}>
+            {user && <h1>Found user info!!</h1>}
+            {user && <SideDrawer />}
+            <Box
+                d="flex"
+                justifyContent="space-between"
+                w="100%"
+                h="91.5vh"
+                p="10px"
+            >
+                {user && <MyChats fetchAgain={fetchAgain} />}
+                {user && (
+                    <Chatbox
+                        fetchAgain={fetchAgain}
+                        setFetchAgain={setFetchAgain}
+                    />
+                )}
+            </Box>
+        </div>
+    );
+};
+
+export default Chatpage;
