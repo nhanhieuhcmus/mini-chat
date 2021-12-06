@@ -4,7 +4,7 @@ const dotenv = require("dotenv");
 const userRoutes = require("./routes/userRoutes");
 const chatRoutes = require("./routes/chatRoutes");
 const messageRoutes = require("./routes/messageRoutes");
-const { notFound, errorHandler } = require("./middleware/errorMiddleware");
+const { notFound, errorHandler } = require("./middlewares/errorMiddleware");
 const path = require("path");
 const cors = require("cors");
 
@@ -15,11 +15,7 @@ const app = express();
 app.use(cors());
 app.options("*", cors());
 
-app.use(express.json()); // to accept json data
-
-// app.get("/", (req, res) => {
-//   res.send("API Running!");
-// });
+app.use(express.json()); // accept json data
 
 app.use("/api/user", userRoutes);
 app.use("/api/chat", chatRoutes);
@@ -79,7 +75,7 @@ io.on("connection", (socket) => {
     socket.on("stop typing", (room) => socket.in(room).emit("stop typing"));
 
     socket.on("new message", (newMessageRecieved) => {
-        var chat = newMessageRecieved.chat;
+        let chat = newMessageRecieved.chat;
 
         if (!chat.users) return console.log("chat.users not defined");
 
