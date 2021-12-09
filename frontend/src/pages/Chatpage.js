@@ -6,8 +6,8 @@ import MyChats from "../components/MyChats";
 import { ChatState } from "../context/ChatProvider";
 
 const Chatpage = () => {
-    const { user } = ChatState();
-    const [fetchAgain, setFetchAgain] = useState(false);
+    const { user, fetchAgain, setFetchAgain } = ChatState();
+    // const [fetchAgain, setFetchAgain] = useState(false);
 
     return (
         <div style={{ width: "100%" }}>
