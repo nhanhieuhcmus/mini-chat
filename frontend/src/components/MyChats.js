@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 import { getSender } from "../utils/chatLogics";
 import { ChatState } from "../context/ChatProvider";
 import ChatLoading from "./ChatLoading";
-import GroupChatModal from "./miscellaneous/GroupChatModal";
+import GroupChatModalContainer from "./container/GroupChatModalContainer";
 import { fetchChats } from "../utils/chatHelpers";
 
 const MyChats = ({ fetchAgain }) => {
@@ -43,7 +43,7 @@ const MyChats = ({ fetchAgain }) => {
                 alignItems="center"
             >
                 My Chats
-                <GroupChatModal>
+                <GroupChatModalContainer>
                     <Button
                         d="flex"
                         fontSize={{ base: "17px", md: "10px", lg: "17px" }}
@@ -51,7 +51,7 @@ const MyChats = ({ fetchAgain }) => {
                     >
                         New Group Chat
                     </Button>
-                </GroupChatModal>
+                </GroupChatModalContainer>
             </Box>
             <Box
                 d="flex"

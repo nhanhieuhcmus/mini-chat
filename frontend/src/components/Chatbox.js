@@ -1,6 +1,6 @@
 import { Box } from "@chakra-ui/layout";
 import { ChatState } from "../context/ChatProvider";
-import SingleChatContainer from "./SingleChatContainer";
+import SingleChatContainer from "./container/SingleChatContainer";
 import "../styles/styles.css";
 
 const Chatbox = ({ fetchAgain, setFetchAgain }) => {

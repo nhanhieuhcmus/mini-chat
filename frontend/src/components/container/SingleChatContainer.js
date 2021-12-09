@@ -2,9 +2,9 @@ import { useToast } from "@chakra-ui/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import io from "socket.io-client";
-import { ChatState } from "../context/ChatProvider";
-import SingleChat from "./SingleChat";
-import * as event from "../constant/event/event";
+import { ChatState } from "../../context/ChatProvider";
+import SingleChat from "../SingleChat";
+import * as event from "../../constant/event/event";
 const ENDPOINT =
     process.env.REACT_APP_REQUEST_BASE_URL || "http://localhost:5000";
 let socket, selectedChatCompare;

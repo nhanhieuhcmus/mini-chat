@@ -14,7 +14,7 @@ const ChatProvider = ({ children }) => {
     useEffect(() => {
         let userInfo;
         const unlistener = history.listen((location) => {
-            console.log(location);
+            console.log(location.pathname);
             userInfo = JSON.parse(localStorage.getItem("userInfo"));
             setUser(userInfo);
         });

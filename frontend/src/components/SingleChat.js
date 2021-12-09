@@ -9,7 +9,7 @@ import { ChatState } from "../context/ChatProvider";
 import "../styles/styles.css";
 import { getSender, getSenderFull } from "../utils/chatLogics";
 import ProfileModal from "./miscellaneous/ProfileModal";
-import UpdateGroupChatModal from "./miscellaneous/UpdateGroupChatModal";
+import UpdateGroupChatModalContainer from "./container/UpdateGroupChatModalContainer";
 import ScrollableChat from "./ScrollableChat";
 
 const SingleChat = ({
@@ -65,7 +65,7 @@ const SingleChat = ({
                             ) : (
                                 <>
                                     {selectedChat.chatName.toUpperCase()}
-                                    <UpdateGroupChatModal
+                                    <UpdateGroupChatModalContainer
                                         fetchMessages={fetchMessages}
                                         fetchAgain={fetchAgain}
                                         setFetchAgain={setFetchAgain}

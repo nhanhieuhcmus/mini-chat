@@ -8,6 +8,6 @@ const config = {
     withCredentials: false,
 };
 
-const instance = axios.create(config);
+const axiosInstance = axios.create(config);
 
-export default instance;
+export default axiosInstance;
