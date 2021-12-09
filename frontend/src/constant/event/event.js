@@ -5,3 +5,13 @@ const SETUP = "setup";
 const CONNECTED = "connected";
 const TYPING = "typing";
 const MESSAGE_RECEIVED = "message recieved";
+
+export {
+    JOIN_CHAT,
+    STOP_TYPING,
+    NEW_MESSAGE,
+    SETUP,
+    CONNECTED,
+    TYPING,
+    MESSAGE_RECEIVED,
+};
