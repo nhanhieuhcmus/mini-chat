@@ -47,7 +47,6 @@ const Login = () => {
             localStorage.setItem("userInfo", JSON.stringify(data));
             setLoading(false);
             history.push("/chats");
-            console.log(">> check history in Login: ", history);
         } catch (error) {
             console.log(error);
             // toast({
