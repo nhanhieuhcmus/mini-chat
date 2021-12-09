@@ -19,8 +19,6 @@ function Homepage() {
 
     useEffect(() => {
         const user = JSON.parse(localStorage.getItem("userInfo"));
-        console.log(">>check user info from HomePage: ", user);
-        console.log(">>check history in from HomePage: ", history);
         if (user) history.push("/chats");
     }, [history]);
 

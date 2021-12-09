@@ -33,7 +33,7 @@ import axios from "axios";
 import { useState } from "react";
 import NotificationBadge, { Effect } from "react-notification-badge";
 import { useHistory } from "react-router-dom";
-import { getSender } from "../../utils/ChatLogics";
+import { getSender } from "../../utils/chatLogics";
 import { ChatState } from "../../context/ChatProvider";
 import ChatLoading from "../ChatLoading";
 import UserListItem from "../userAvatar/UserListItem";
@@ -109,8 +109,6 @@ function SideDrawer() {
     };
 
     const accessChat = async (userId) => {
-        console.log(userId);
-
         try {
             setLoadingChat(true);
             const config = {

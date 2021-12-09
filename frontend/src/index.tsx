@@ -5,6 +5,8 @@ import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import { ChatProvider } from "./context/ChatProvider";
 import "./index.css";
+import dotenv from "dotenv";
+dotenv.config();
 
 ReactDOM.render(
     <BrowserRouter>

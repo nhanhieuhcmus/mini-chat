@@ -50,7 +50,6 @@ const UpdateGroupChatModal = ({ fetchMessages, fetchAgain, setFetchAgain }) => {
                 `http://localhost:5000/api/user?search=${search}`,
                 config
             );
-            console.log(data);
             setLoading(false);
             setSearchResult(data);
         } catch (error) {
@@ -85,7 +84,6 @@ const UpdateGroupChatModal = ({ fetchMessages, fetchAgain, setFetchAgain }) => {
                 config
             );
 
-            console.log(data._id);
             // setSelectedChat("");
             setSelectedChat(data);
             setFetchAgain(!fetchAgain);
@@ -149,7 +147,7 @@ const UpdateGroupChatModal = ({ fetchMessages, fetchAgain, setFetchAgain }) => {
         } catch (error) {
             toast({
                 title: "Error Occured!",
-                description: error.response.data.message,
+                // description: error.response.data.message,
                 status: "error",
                 duration: 5000,
                 isClosable: true,
@@ -198,7 +196,7 @@ const UpdateGroupChatModal = ({ fetchMessages, fetchAgain, setFetchAgain }) => {
         } catch (error) {
             toast({
                 title: "Error Occured!",
-                description: error.response.data.message,
+                // description: error.response.data.message,
                 status: "error",
                 duration: 5000,
                 isClosable: true,

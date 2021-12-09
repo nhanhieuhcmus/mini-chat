@@ -7,7 +7,7 @@ import { Button } from "@chakra-ui/react";
 import { useToast } from "@chakra-ui/toast";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { getSender } from "../utils/ChatLogics";
+import { getSender } from "../utils/chatLogics";
 import { ChatState } from "../context/ChatProvider";
 import ChatLoading from "./ChatLoading";
 import GroupChatModal from "./miscellaneous/GroupChatModal";
@@ -21,7 +21,6 @@ const MyChats = ({ fetchAgain }) => {
     const toast = useToast();
 
     const fetchChats = async () => {
-        // console.log(user._id);
         try {
             const config = {
                 headers: {
@@ -33,6 +32,7 @@ const MyChats = ({ fetchAgain }) => {
                 "http://localhost:5000/api/chat",
                 config
             );
+
             setChats(data);
         } catch (error) {
             toast({
@@ -48,11 +48,6 @@ const MyChats = ({ fetchAgain }) => {
 
     useEffect(() => {
         setLoggedUser(JSON.parse(localStorage.getItem("userInfo")));
-        // async function fetchMyAPI() {
-        //     await fetchChats();
-        // }
-
-        // fetchMyAPI();
         fetchChats();
     }, [fetchAgain]);
 

@@ -6,14 +6,11 @@ import MyChats from "../components/MyChats";
 import { ChatState } from "../context/ChatProvider";
 
 const Chatpage = () => {
-    const { user, test } = ChatState();
+    const { user } = ChatState();
     const [fetchAgain, setFetchAgain] = useState(false);
 
-    console.log("check user info in Chatpage: ", user);
-    console.log("check test value in Chatpage: ", test);
     return (
         <div style={{ width: "100%" }}>
-            {user && <h1>Found user info!!</h1>}
             {user && <SideDrawer />}
             <Box
                 d="flex"
