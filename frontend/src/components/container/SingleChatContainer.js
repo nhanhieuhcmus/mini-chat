@@ -1,10 +1,13 @@
 import { toast } from "@chakra-ui/toast";
 import { useEffect, useState } from "react";
-import axios from "../../config/axios";
 import * as event from "../../constant/event/event";
 import { ChatState } from "../../context/ChatProvider";
 import { SocketState } from "../../context/SocketProvider";
 import SingleChat from "../SingleChat";
+import {
+    getMessageByIdService,
+    sendMessageService,
+} from "../../services/chatService";
 
 let selectedChatCompare;
 
@@ -20,17 +23,11 @@ const SingleChatContainer = ({ fetchAgain, setFetchAgain }) => {
         if (!selectedChat) return;
 
         try {
-            const config = {
-                headers: {
-                    Authorization: `Bearer ${user.token}`,
-                },
-            };
-
             setLoading(true);
 
-            const { data } = await axios.get(
-                `http://localhost:5000/api/message/${selectedChat._id}`,
-                config
+            const { data } = await getMessageByIdService(
+                selectedChat._id,
+                user.token
             );
 
             setMessages(data);
@@ -53,20 +50,10 @@ const SingleChatContainer = ({ fetchAgain, setFetchAgain }) => {
         if (event.key === "Enter" && newMessage) {
             socket.emit(event.STOP_TYPING, selectedChat._id);
             try {
-                const config = {
-                    headers: {
-                        "Content-type": "application/json",
-                        Authorization: `Bearer ${user.token}`,
-                    },
-                };
                 setNewMessage("");
-                const { data } = await axios.post(
-                    "http://localhost:5000/api/message",
-                    {
-                        content: newMessage,
-                        chatId: selectedChat,
-                    },
-                    config
+                const { data } = await sendMessageService(
+                    { content: newMessage, chatId: selectedChat },
+                    user.token
                 );
                 socket.emit(event.NEW_MESSAGE, data);
                 setMessages([...messages, data]);

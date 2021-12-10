@@ -1,7 +1,12 @@
 import { useDisclosure, useToast } from "@chakra-ui/react";
-import axios from "axios";
 import { useState } from "react";
 import { ChatState } from "../../context/ChatProvider";
+import {
+    addUserService,
+    removeUserService,
+    renameGroupService,
+    searchUserService,
+} from "../../services/userService";
 import UpdateGroupChatModal from "../miscellaneous/UpdateGroupChatModal";
 
 const UpdateGroupChatModalContainer = ({
@@ -27,15 +32,7 @@ const UpdateGroupChatModalContainer = ({
 
         try {
             setLoading(true);
-            const config = {
-                headers: {
-                    Authorization: `Bearer ${user.token}`,
-                },
-            };
-            const { data } = await axios.get(
-                `http://localhost:5000/api/user?search=${search}`,
-                config
-            );
+            const { data } = await searchUserService(search, user.token);
             setLoading(false);
             setSearchResult(data);
         } catch (error) {
@@ -56,18 +53,12 @@ const UpdateGroupChatModalContainer = ({
 
         try {
             setRenameLoading(true);
-            const config = {
-                headers: {
-                    Authorization: `Bearer ${user.token}`,
-                },
-            };
-            const { data } = await axios.put(
-                `http://localhost:5000/api/chat/rename`,
+            const { data } = await renameGroupService(
                 {
                     chatId: selectedChat._id,
                     chatName: groupChatName,
                 },
-                config
+                user.token
             );
 
             // setSelectedChat("");
@@ -113,18 +104,13 @@ const UpdateGroupChatModalContainer = ({
 
         try {
             setLoading(true);
-            const config = {
-                headers: {
-                    Authorization: `Bearer ${user.token}`,
-                },
-            };
-            const { data } = await axios.put(
-                `http://localhost:5000/api/chat/groupadd`,
+
+            const { data } = await addUserService(
                 {
                     chatId: selectedChat._id,
                     userId: user1._id,
                 },
-                config
+                user.token
             );
 
             setSelectedChat(data);
@@ -161,18 +147,13 @@ const UpdateGroupChatModalContainer = ({
 
         try {
             setLoading(true);
-            const config = {
-                headers: {
-                    Authorization: `Bearer ${user.token}`,
-                },
-            };
-            const { data } = await axios.put(
-                `http://localhost:5000/api/chat/groupremove`,
+
+            const { data } = await removeUserService(
                 {
                     chatId: selectedChat._id,
                     userId: user1._id,
                 },
-                config
+                user.token
             );
 
             user1._id === user._id ? setSelectedChat() : setSelectedChat(data);

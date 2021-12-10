@@ -8,6 +8,10 @@ const config = {
     withCredentials: false,
 };
 
-const axiosInstance = axios.create(config);
+const createAxiosInstance = (authToken) => {
+    config.headers["Authorization"] = `Bearer ${authToken}`;
+    const axiosInstance = axios.create(config);
+    return axiosInstance;
+};
 
-export default axiosInstance;
+export default createAxiosInstance;

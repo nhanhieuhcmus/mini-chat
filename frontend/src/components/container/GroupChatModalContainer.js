@@ -2,10 +2,12 @@
  * A modal box show when click "New Group Chat" button
  */
 import { useDisclosure, useToast } from "@chakra-ui/react";
-import axios from "axios";
 import { useState } from "react";
 import { ChatState } from "../../context/ChatProvider";
-
+import {
+    createGroupService,
+    searchUserService,
+} from "../../services/userService";
 import GroupChatModal from "../miscellaneous/GroupChatModal";
 
 const GroupChatModalContainer = ({ children }) => {
@@ -42,15 +44,7 @@ const GroupChatModalContainer = ({ children }) => {
 
         try {
             setLoading(true);
-            const config = {
-                headers: {
-                    Authorization: `Bearer ${user.token}`,
-                },
-            };
-            const { data } = await axios.get(
-                `http://localhost:5000/api/user?search=${search}`,
-                config
-            );
+            const { data } = await searchUserService(search, user.token);
             setLoading(false);
             setSearchResult(data);
         } catch (error) {
@@ -84,18 +78,12 @@ const GroupChatModalContainer = ({ children }) => {
         }
 
         try {
-            const config = {
-                headers: {
-                    Authorization: `Bearer ${user.token}`,
-                },
-            };
-            const { data } = await axios.post(
-                `http://localhost:5000/api/chat/group`,
+            const { data } = await createGroupService(
                 {
                     name: groupChatName,
                     users: JSON.stringify(selectedUsers.map((u) => u._id)),
                 },
-                config
+                user.token
             );
             setChats([data, ...chats]);
             onClose();

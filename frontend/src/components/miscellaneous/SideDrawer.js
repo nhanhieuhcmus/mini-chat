@@ -29,12 +29,13 @@ import {
 import { Spinner } from "@chakra-ui/spinner";
 import { useToast } from "@chakra-ui/toast";
 import { Tooltip } from "@chakra-ui/tooltip";
-import axios from "axios";
 import { useState } from "react";
 import NotificationBadge, { Effect } from "react-notification-badge";
 import { useHistory } from "react-router-dom";
-import { getSender } from "../../utils/chatLogics";
 import { ChatState } from "../../context/ChatProvider";
+import { accessChatService } from "../../services/chatService";
+import { searchUserService } from "../../services/userService";
+import { getSender } from "../../utils/chatLogics";
 import ChatLoading from "../ChatLoading";
 import UserListItem from "../userAvatar/UserListItem";
 import ProfileModal from "./ProfileModal";
@@ -72,16 +73,7 @@ function SideDrawer() {
         try {
             setLoading(true);
 
-            const config = {
-                headers: {
-                    Authorization: `Bearer ${user.token}`,
-                },
-            };
-
-            const { data } = await axios.get(
-                `http://localhost:5000/api/user?search=${search}`,
-                config
-            );
+            const { data } = await searchUserService(search, user.token);
 
             setLoading(false);
             setSearchResult(data);
@@ -99,18 +91,7 @@ function SideDrawer() {
 
     const accessChat = async (userId) => {
         try {
-            setLoadingChat(true);
-            const config = {
-                headers: {
-                    "Content-type": "application/json",
-                    Authorization: `Bearer ${user.token}`,
-                },
-            };
-            const { data } = await axios.post(
-                `http://localhost:5000/api/chat`,
-                { userId },
-                config
-            );
+            const { data } = await accessChatService({ userId }, user.token);
 
             if (!chats.find((c) => c._id === data._id))
                 setChats([data, ...chats]);
