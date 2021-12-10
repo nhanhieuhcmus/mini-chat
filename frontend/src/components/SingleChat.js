@@ -23,6 +23,7 @@ const SingleChat = ({
     fetchAgain,
     setFetchAgain,
 }) => {
+    console.log("check messages: ", messages);
     const { selectedChat, setSelectedChat, user } = ChatState();
     const defaultOptions = {
         loop: true,

@@ -69,17 +69,6 @@ function SideDrawer() {
             return;
         }
 
-        // if (!search) {
-        //     toast({
-        //         title: "Please Enter something in search",
-        //         status: "warning",
-        //         duration: 5000,
-        //         isClosable: true,
-        //         position: "top-left",
-        //     });
-        //     return;
-        // }
-
         try {
             setLoading(true);
 
